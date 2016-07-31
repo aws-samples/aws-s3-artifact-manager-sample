@@ -28,36 +28,36 @@ import com.amazonaws.services.s3.model.SetBucketVersioningConfigurationRequest;
 
 public class S3ArtifactManager {
 
-  private final AmazonS3 s3;
+   private final AmazonS3 s3;
 
-  public S3ArtifactManager(AmazonS3 s3, Regions awsRegion) {
-    this.s3 = s3;
-    this.s3.setRegion(Region.getRegion(awsRegion));
-  }
+   public S3ArtifactManager(AmazonS3 s3, Regions awsRegion) {
+      this.s3 = s3;
+      this.s3.setRegion(Region.getRegion(awsRegion));
+   }
 
-  public String upload(String s3Bucket, String s3Key, File file)
-      throws AmazonServiceException, AmazonClientException {
+   public String upload(String s3Bucket, String s3Key, File file)
+         throws AmazonServiceException, AmazonClientException {
 
-    if (!s3.doesBucketExist(s3Bucket)) {
-      s3.createBucket(s3Bucket);
-    }
+      if (!s3.doesBucketExist(s3Bucket)) {
+         s3.createBucket(s3Bucket);
+      }
 
-    // enable bucket versioning
-    SetBucketVersioningConfigurationRequest configRequest =
-        new SetBucketVersioningConfigurationRequest(s3Bucket,
-            new BucketVersioningConfiguration(BucketVersioningConfiguration.ENABLED));
-    s3.setBucketVersioningConfiguration(configRequest);
+      // enable bucket versioning
+      SetBucketVersioningConfigurationRequest configRequest =
+            new SetBucketVersioningConfigurationRequest(s3Bucket,
+                  new BucketVersioningConfiguration(BucketVersioningConfiguration.ENABLED));
+      s3.setBucketVersioningConfiguration(configRequest);
 
-    // enable server-side encryption (SSE-S3)
-    PutObjectRequest request = new PutObjectRequest(s3Bucket, s3Key, file);
-    ObjectMetadata objectMetadata = new ObjectMetadata();
-    objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);
-    request.setMetadata(objectMetadata);
+      // enable server-side encryption (SSE-S3)
+      PutObjectRequest request = new PutObjectRequest(s3Bucket, s3Key, file);
+      ObjectMetadata objectMetadata = new ObjectMetadata();
+      objectMetadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);
+      request.setMetadata(objectMetadata);
 
-    // upload object to S3
-    PutObjectResult putObjectResult = s3.putObject(request);
+      // upload object to S3
+      PutObjectResult putObjectResult = s3.putObject(request);
 
-    return putObjectResult.getVersionId();
-  }
+      return putObjectResult.getVersionId();
+   }
 
 }

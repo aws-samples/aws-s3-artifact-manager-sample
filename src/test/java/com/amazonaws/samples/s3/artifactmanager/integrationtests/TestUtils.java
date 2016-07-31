@@ -27,28 +27,28 @@ import com.amazonaws.services.s3.model.S3VersionSummary;
 
 public class TestUtils {
 
-  public static void deleteS3Bucket(AmazonS3 s3Client, String bucketName) {
+   public static void deleteS3Bucket(AmazonS3 s3Client, String bucketName) {
 
-    // delete objects or mark objects as deleted if versioned bucket
-    for (S3ObjectSummary summary : S3Objects.inBucket(s3Client, bucketName)) {
-      s3Client.deleteObject(bucketName, summary.getKey());
-    }
+      // delete objects or mark objects as deleted if versioned bucket
+      for (S3ObjectSummary summary : S3Objects.inBucket(s3Client, bucketName)) {
+         s3Client.deleteObject(bucketName, summary.getKey());
+      }
 
-    // delete versions
-    for (S3VersionSummary summary : S3Versions.inBucket(s3Client, bucketName)) {
-      s3Client.deleteVersion(bucketName, summary.getKey(), summary.getVersionId());
-    }
+      // delete versions
+      for (S3VersionSummary summary : S3Versions.inBucket(s3Client, bucketName)) {
+         s3Client.deleteVersion(bucketName, summary.getKey(), summary.getVersionId());
+      }
 
-    // delete bucket 
-    s3Client.deleteBucket(bucketName);
-  }
+      // delete bucket 
+      s3Client.deleteBucket(bucketName);
+   }
 
-  public static File createSampleFile(String fileName) throws IOException {
-    File file = File.createTempFile(fileName, ".txt");
-    file.deleteOnExit();
-    Writer writer = new OutputStreamWriter(new FileOutputStream(file));
-    writer.write("unit and integration security testing AWS applications\n");
-    writer.close();
-    return file;
-  }
+   public static File createSampleFile(String fileName) throws IOException {
+      File file = File.createTempFile(fileName, ".txt");
+      file.deleteOnExit();
+      Writer writer = new OutputStreamWriter(new FileOutputStream(file));
+      writer.write("unit and integration security testing AWS applications\n");
+      writer.close();
+      return file;
+   }
 }
