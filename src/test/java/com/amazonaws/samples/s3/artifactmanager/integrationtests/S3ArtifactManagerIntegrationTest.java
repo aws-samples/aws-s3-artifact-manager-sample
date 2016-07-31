@@ -1,21 +1,22 @@
-package amazonaws.samples.testing.integration;
-
 /**
- * Copyright 2016-2016 Amazon.com, Inc. or its affiliates.
- * All Rights Reserved.
+ * Copyright 2016-2016 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
- * Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file
- * except in compliance with the License. A copy of the License is located at
+ * Licensed under the Apache License, Version 2.0 (the "License"). 
+ * You may not use this file except in compliance with the License. 
+ * A copy of the License is located at
  *
- *   http://aws.amazon.com/apache2.0/
+ * http://aws.amazon.com/apache2.0/
  *
- * or in the "license" file accompanying this file. This file is distributed on an "AS IS"
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under the License
+ * or in the "license" file accompanying this file. This file is distributed 
+ * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either 
+ * express or implied. See the License for the specific language governing 
+ * permissions and limitations under the License
  **/
 
-import static amazonaws.samples.testing.integration.TestUtils.createSampleFile;
-import static amazonaws.samples.testing.integration.TestUtils.deleteS3Bucket;
+package com.amazonaws.samples.s3.artifactmanager.integrationtests;
+
+import static com.amazonaws.samples.s3.artifactmanager.integrationtests.TestUtils.createSampleFile;
+import static com.amazonaws.samples.s3.artifactmanager.integrationtests.TestUtils.deleteS3Bucket;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ import org.junit.Test;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.regions.Regions;
+import com.amazonaws.samples.s3.artifactmanager.S3ArtifactManager;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.BucketVersioningConfiguration;
@@ -38,8 +40,6 @@ import com.amazonaws.services.s3.model.GetObjectMetadataRequest;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
-
-import amazonaws.samples.testing.S3ArtifactManager;
 
 public class S3ArtifactManagerIntegrationTest {
 
