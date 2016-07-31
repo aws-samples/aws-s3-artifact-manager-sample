@@ -13,7 +13,9 @@ The sample code provided in this repo is part of a blog post series published in
 Please check out the post series for further details on how to run the tests as part of a CI/CD pipeline.
 
 To run *all* tests locally type: `mvn verify`
+
 To run *unit tests* only type: `mvn verify -DskipIntegrationTests=true`
+
 To run *integration tests* only type: `mvn verify -DskipUnitTests=true`
 
 You'll need Java 8 and Maven installed locally to run the tests. Also, note that in order to run the integration tests properly your AWS local default credentials must have permission to create S3 buckets and objects, otherwise execution will fail.
